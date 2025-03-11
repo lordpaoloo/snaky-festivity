@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Position, Direction } from '@/types/game';
 
@@ -131,24 +130,22 @@ export const useSnakeGame = () => {
         // Increment score and food count
         setScore(prevScore => prevScore + POINTS_PER_FOOD);
         
-        // Increment food eaten count and check for level up
+        // Increment food eaten count and increase level immediately
         setFoodEaten(prev => {
           const newFoodEaten = prev + 1;
           
-          // Level up logic
-          if (newFoodEaten % FOODS_PER_LEVEL === 0) {
-            const newLevel = Math.floor(newFoodEaten / FOODS_PER_LEVEL) + 1;
-            setLevel(newLevel);
-            
-            // Check if reached birthday level
-            if (newLevel === BIRTHDAY_LEVEL) {
-              setIsBirthdayLevel(true);
-              setGameOver(true);
-            } else {
-              // Speed up game with each level
-              const newDelay = Math.max(MIN_DELAY, INITIAL_DELAY - (newLevel - 1) * DELAY_DECREMENT);
-              setDelay(newDelay);
-            }
+          // Level up with every food eaten
+          const newLevel = newFoodEaten + 1;
+          setLevel(newLevel);
+          
+          // Check if reached birthday level
+          if (newLevel === BIRTHDAY_LEVEL) {
+            setIsBirthdayLevel(true);
+            setGameOver(true);
+          } else {
+            // Speed up game with each level
+            const newDelay = Math.max(MIN_DELAY, INITIAL_DELAY - (newLevel - 1) * DELAY_DECREMENT);
+            setDelay(newDelay);
           }
           
           return newFoodEaten;
