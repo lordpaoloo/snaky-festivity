@@ -7,8 +7,8 @@ const INITIAL_FOOD: Position = { x: 10, y: 10 };
 const BOARD_SIZE = 20;
 const INITIAL_DELAY = 200; // milliseconds between moves
 const MIN_DELAY = 80; // fastest speed
-const DELAY_DECREMENT = 5; // how much to speed up per level
-const POINTS_PER_FOOD = 10;
+const DELAY_DECREMENT = 1; // how much to speed up per level
+const POINTS_PER_FOOD = 5;
 const FOODS_PER_LEVEL = 5;
 const BIRTHDAY_LEVEL = 22;
 
