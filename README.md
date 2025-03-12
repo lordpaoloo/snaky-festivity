@@ -1,69 +1,83 @@
-# Welcome to your Lovable project
+# Snaky Festivity
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/67bc4d22-ab84-4f55-8211-77dac470b90c
+Snaky Festivity is a fun and interactive snake game built with modern web technologies. The game includes a special birthday celebration feature when the player reaches a specific level.
 
-## How can I edit this code?
+## Project Structure
 
-There are several ways of editing your application.
+The project is organized into several key parts:
 
-**Use Lovable**
+- **Components**: Reusable UI components used throughout the application.
+- **Hooks**: Custom hooks for managing game logic and state.
+- **Styles**: Tailwind CSS configuration and custom styles.
+- **Utilities**: Utility functions for common tasks.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/67bc4d22-ab84-4f55-8211-77dac470b90c) and start prompting.
+### Key Files and Directories
 
-Changes made via Lovable will be committed automatically to this repo.
+- **`/src/components`**: Contains all the React components used in the game.
+  - **`SnakeGame.tsx`**: The main game component that ties everything together.
+  - **`GameBoard.tsx`**: Renders the game board and the snake.
+  - **`GameControls.tsx`**: Provides controls for starting, pausing, and resetting the game.
+  - **`GameStatus.tsx`**: Displays the current score and level.
+  - **`BirthdayCelebration.tsx`**: Handles the birthday celebration animation and sound.
+- **`/src/hooks`**: Contains custom hooks.
+  - **`useSnakeGame.ts`**: Manages the game state and logic.
+  - **`useSwipeControls.ts`**: Adds swipe controls for mobile devices.
+- **`/src/styles`**: Contains the Tailwind CSS configuration and custom styles.
+  - **`index.css`**: Main CSS file with custom properties and styles.
+- **`/src/lib`**: Utility functions.
+  - **`utils.ts`**: Contains utility functions like `cn` for class name merging.
 
-**Use your preferred IDE**
+## Customization
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Changing the Birthday Level and Name
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+To customize the level at which the birthday celebration occurs and the name displayed, you need to modify the following constants in the `useSnakeGame` hook:
 
-Follow these steps:
+1. **Birthday Level**: Change the `BIRTHDAY_LEVEL` constant.
+2. **Name**: Change the name in the `BirthdayCelebration` component.
+
+#### Step-by-Step Instructions
+
+1. **Open the `useSnakeGame.ts` file**:
+   ```typescript
+   // filepath: /src/hooks/useSnakeGame.ts
+   const BIRTHDAY_LEVEL = 22; // Change this to your desired level
+   ```
+
+2. **Open the `BirthdayCelebration.tsx` file**:
+   ```tsx
+   // filepath: /src/components/BirthdayCelebration.tsx
+   <h2 className="text-3xl font-bold text-purple-700 mb-2 animate-birthday-bounce">
+     Happy Birthday Omer! // Change "Omer" to the desired name
+   </h2>
+   ```
+
+## Running the Project
+
+To run the project locally, follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/lordpaoloo/snaky-festivity.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd snaky-festivity
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm install
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Deployment
 
-**Use GitHub Codespaces**
+Deploy the project using platforms like Netlify or Vercel. Refer to their documentation for detailed instructions.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Custom Domain
 
-## What technologies are used for this project?
+You can use custom domains with platforms like Netlify or Vercel. Refer to their documentation for detailed instructions.
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/67bc4d22-ab84-4f55-8211-77dac470b90c) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)

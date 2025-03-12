@@ -11,6 +11,8 @@ const DELAY_DECREMENT = 1; // how much to speed up per level
 const POINTS_PER_FOOD = 5;
 const FOODS_PER_LEVEL = 5;
 const BIRTHDAY_LEVEL = 22;
+const INITIAL_LEVEL = 0; // Change the initial level to 0
+const LEVEL_INCREMENT = 2; // Increment level by 2 per food
 
 export const useSnakeGame = () => {
   const [snake, setSnake] = useState<Position[]>(INITIAL_SNAKE);
@@ -20,7 +22,7 @@ export const useSnakeGame = () => {
   const [gameOver, setGameOver] = useState<boolean>(true);
   const [paused, setPaused] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
-  const [level, setLevel] = useState<number>(0);
+  const [level, setLevel] = useState<number>(INITIAL_LEVEL);
   const [delay, setDelay] = useState<number>(INITIAL_DELAY);
   const [foodEaten, setFoodEaten] = useState<number>(0);
   const [isBirthdayLevel, setIsBirthdayLevel] = useState<boolean>(false);
@@ -134,8 +136,8 @@ export const useSnakeGame = () => {
         setFoodEaten(prev => {
           const newFoodEaten = prev + 1;
           
-          // Level up with every food eaten
-          const newLevel = newFoodEaten + 1;
+          // Increment level by 2 per food
+          const newLevel = INITIAL_LEVEL + newFoodEaten * LEVEL_INCREMENT;
           setLevel(newLevel);
           
           // Check if reached birthday level
@@ -185,7 +187,7 @@ export const useSnakeGame = () => {
     setGameOver(false);
     setPaused(false);
     setScore(0);
-    setLevel(1);
+    setLevel(INITIAL_LEVEL);
     setDelay(INITIAL_DELAY);
     setFoodEaten(0);
     setIsBirthdayLevel(false);
