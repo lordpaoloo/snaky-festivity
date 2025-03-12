@@ -20,7 +20,7 @@ export const useSnakeGame = () => {
   const [gameOver, setGameOver] = useState<boolean>(true);
   const [paused, setPaused] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
-  const [level, setLevel] = useState<number>(1);
+  const [level, setLevel] = useState<number>(0);
   const [delay, setDelay] = useState<number>(INITIAL_DELAY);
   const [foodEaten, setFoodEaten] = useState<number>(0);
   const [isBirthdayLevel, setIsBirthdayLevel] = useState<boolean>(false);
