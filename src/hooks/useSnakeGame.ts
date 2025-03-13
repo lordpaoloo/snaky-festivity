@@ -7,12 +7,12 @@ const INITIAL_FOOD: Position = { x: 10, y: 10 };
 const BOARD_SIZE = 20;
 const INITIAL_DELAY = 200; // milliseconds between moves
 const MIN_DELAY = 80; // fastest speed
-const DELAY_DECREMENT = 1; // how much to speed up per level
+const DELAY_DECREMENT = 0.01; // how much to speed up per level
 const POINTS_PER_FOOD = 5;
 const FOODS_PER_LEVEL = 5;
-const BIRTHDAY_LEVEL = 22;
+const BIRTHDAY_LEVEL = 20;
 const INITIAL_LEVEL = 0; // Change the initial level to 0
-const LEVEL_INCREMENT = 2; // Increment level by 2 per food
+const LEVEL_INCREMENT = 1; // Increment level by 2 per food
 
 export const useSnakeGame = () => {
   const [snake, setSnake] = useState<Position[]>(INITIAL_SNAKE);
@@ -87,6 +87,82 @@ export const useSnakeGame = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameOver, paused]);
   
+  // Handle touch controls
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (gameOver || paused) return;
+      const touch = e.touches[0];
+      const startX = touch.clientX;
+      const startY = touch.clientY;
+
+      const handleTouchMove = (moveEvent: TouchEvent) => {
+        const moveTouch = moveEvent.touches[0];
+        const deltaX = moveTouch.clientX - startX;
+        const deltaY = moveTouch.clientY - startY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 0 && lastDirection.current !== 'left') {
+            setNextDirection('right');
+          } else if (deltaX < 0 && lastDirection.current !== 'right') {
+            setNextDirection('left');
+          }
+        } else {
+          if (deltaY > 0 && lastDirection.current !== 'up') {
+            setNextDirection('down');
+          } else if (deltaY < 0 && lastDirection.current !== 'down') {
+            setNextDirection('up');
+          }
+        }
+
+        window.removeEventListener('touchmove', handleTouchMove);
+      };
+
+      window.addEventListener('touchmove', handleTouchMove);
+    };
+
+    window.addEventListener('touchstart', handleTouchStart);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+    };
+  }, [gameOver, paused]);
+
+  // Handle mouse controls
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      if (gameOver || paused) return;
+      const startX = e.clientX;
+      const startY = e.clientY;
+
+      const handleMouseMove = (moveEvent: MouseEvent) => {
+        const deltaX = moveEvent.clientX - startX;
+        const deltaY = moveEvent.clientY - startY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 0 && lastDirection.current !== 'left') {
+            setNextDirection('right');
+          } else if (deltaX < 0 && lastDirection.current !== 'right') {
+            setNextDirection('left');
+          }
+        } else {
+          if (deltaY > 0 && lastDirection.current !== 'up') {
+            setNextDirection('down');
+          } else if (deltaY < 0 && lastDirection.current !== 'down') {
+            setNextDirection('up');
+          }
+        }
+
+        window.removeEventListener('mousemove', handleMouseMove);
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, [gameOver, paused]);
+
   // Game loop
   const moveSnake = useCallback(() => {
     if (gameOver || paused) return;
