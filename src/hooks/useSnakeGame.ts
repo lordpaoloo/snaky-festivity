@@ -10,7 +10,7 @@ const MIN_DELAY = 80; // fastest speed
 const DELAY_DECREMENT = 0.01; // how much to speed up per level
 const POINTS_PER_FOOD = 5;
 const FOODS_PER_LEVEL = 5;
-const BIRTHDAY_LEVEL = 22;
+const BIRTHDAY_LEVEL = 16;
 const INITIAL_LEVEL = 0; // Change the initial level to 0
 const LEVEL_INCREMENT = 1; // Increment level by 2 per food
 
