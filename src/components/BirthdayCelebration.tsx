@@ -50,10 +50,10 @@ export const BirthdayCelebration: React.FC = () => {
           <Sparkles className="h-10 w-10 text-yellow-500" />
         </div>
         <h2 className="text-3xl font-bold text-purple-700 mb-2 animate-birthday-bounce">
-          Happy Birthday Omer!
+          Happy Birthday hamza!
         </h2>
         <p className="text-gray-700">
-          You made it to level 22! What an amazing achievement!
+          You made it to year 16! What an amazing achievement!
         </p>
       </div>
       
